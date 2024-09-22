@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Beckham's Recipes</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Banner with background image -->
+    <header class="banner">
+        <h1>Beckham's Recipes</h1>
+    </header>
+
+    <!-- Full-width Tab Navigation -->
+    <nav>
+        <ul class="tabs">
+            <li class="tab-link active" onclick="openTab(event, 'home')">
+                <i class="fas fa-home"></i> Home
+            </li>
+            <li class="tab-link" onclick="openTab(event, 'categories')">
+                <i class="fas fa-list"></i> Categories
+            </li>
+            <li class="tab-link" onclick="openTab(event, 'tags')">
+                <i class="fas fa-tags"></i> Tags
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="home" class="tab-content active">
+            <h2>Welcome!</h2>
+            <br>
+            <p>This is my personal space to keep track of all my favorite recipes and to explore the basics of web building. By merging my hobbies of web design and cooking, I’m embarking on a journey of learning and growth. As I delve into the world of web building, I’m excited to combine my love for cooking with new skills in technology. It’s a fun and rewarding way to bring my recipes to life online.</p>
+        
+            <p>On this site, you’ll find a collection of my tried-and-true recipes, from classic baked goods to experimental dishes, and even some recipes I’ve been eager to try but haven’t yet had the chance. Feel free to use any recipe, but please credit the original author linked in each recipe.</p>
+        
+            <p>Thank you for joining me on this journey.</p>
+        
+            <p>Happy cooking!</p>
+        </section>
+        
+
+        <section id="categories" class="tab-content">
+            <h2>Table of Contents</h2>
+            <p>Here you can add the categories for your recipes.</p>
+        </section>
+
+        <section id="tags" class="tab-content">
+            <h2>Table of Contents</h2>
+            <p>Here you can add the tags for your recipes.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Beckham's Recipes. All rights reserved.</p>
+    </footer>
+
+    <script src="assets/js/scripts.js"></script>
+</body>
+</html>
