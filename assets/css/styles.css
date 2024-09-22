@@ -1,0 +1,120 @@
+/* CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Ensure the body takes up the full height of the viewport */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+/* Banner styling with background image */
+.banner {
+    background-image: url('../images/LandingPageBanner.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 2rem;
+}
+
+p {
+    margin-bottom: 1.5rem; /* Adds space between paragraphs */
+    line-height: 1.6; /* Adjusts line height for better readability */
+}
+
+
+/* Full-width Tab Navigation Styling */
+.tabs {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    background-color: #0d0e0d;
+    padding: 0;
+    margin: 0;
+}
+
+/* Individual tab styling */
+.tab-link {
+    flex-grow: 1;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    background-color: #0d0e0d;
+    border: 1px solid #0d0e0d;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 1.1rem;
+}
+
+.tab-link i {
+    margin-right: 8px;
+}
+
+/* Hover effect for tabs */
+.tab-link:hover {
+    background-color: #434b45;
+}
+
+/* Active tab styling */
+.tab-link.active {
+    background-color: white;
+    color: #0d0e0d;
+    border: 1px solid #0d0e0d;
+}
+
+/* Tab content section */
+.tab-content {
+    display: none;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Main container (for spacing) */
+main {
+    flex-grow: 1; /* This ensures the footer sticks to the bottom */
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .banner {
+        height: 4rem;
+    }
+    .banner h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner {
+        height: 4rem;
+    }
+    .banner h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Sticky footer */
+footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #333;
+    color: white;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
