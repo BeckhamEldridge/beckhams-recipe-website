@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
 
     <!-- Banner with background image -->
@@ -34,12 +36,17 @@
         <section id="home" class="tab-content active">
             <h2>Welcome!</h2>
             <br>
-            <p>This is my personal space to keep track of all my favorite recipes and to explore the basics of web building. By merging my hobbies of web design and cooking, I am embarking on a journey of learning and growth. As I delve into the world of web building, I am excited to combine my love for cooking with new skills in technology. It is a fun and rewarding way to bring my recipes to life online.</p>
-        
-            <p>On this site, you will find a collection of my tried-and-true recipes, from classic baked goods to experimental dishes, and even some recipes I have been eager to try but have not yet had the chance. Feel free to use any recipe, but please credit the original author linked in each recipe.</p>
-        
+            <p>This is my personal space to keep track of all my favorite recipes and to explore the basics of web
+                building. By merging my hobbies of web design and cooking, I am embarking on a journey of learning and
+                growth. As I delve into the world of web building, I am excited to combine my love for cooking with new
+                skills in technology. It is a fun and rewarding way to bring my recipes to life online.</p>
+
+            <p>On this site, you will find a collection of my tried-and-true recipes, from classic baked goods to
+                experimental dishes, and even some recipes I have been eager to try but have not yet had the chance.
+                Feel free to use any recipe, but please credit the original author linked in each recipe.</p>
+
             <p>Thank you for joining me on this journey.</p>
-        
+
             <p>Happy cooking!</p>
         </section>
 
@@ -58,6 +65,26 @@
         <p>© 2024 Beckham's Recipes. All rights reserved.</p>
     </footer>
 
-    <script type="module" src="assets/js/scripts.js"></script>
+    <script src="assets/js/scripts.js"></script>
+
+    <script type="module">
+        //import { createClient } from '@supabase/supabase-js';
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/supabase-js.min.js';
+
+        const supabaseUrl = recipes.env.SUPABASE_URL;
+        const supabaseKey = recipes.env.SUPABASE_KEY;
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        async function fetchCategories() {
+            const { data, error } = await supabase
+                .from('Categories')
+                .select('*');
+            if (error) console.error(error);
+            else console.log(data);
+        }
+
+        fetchCategories();
+    </script>
 </body>
+
 </html>
