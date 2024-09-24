@@ -67,24 +67,6 @@
 
     <script src="assets/js/scripts.js"></script>
 
-    <script type="module">
-        //import { createClient } from '@supabase/supabase-js';
-        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/supabase-js.min.js';
-
-        const supabaseUrl = recipes.env.SUPABASE_URL;
-        const supabaseKey = recipes.env.SUPABASE_KEY;
-        const supabase = createClient(supabaseUrl, supabaseKey);
-
-        async function fetchCategories() {
-            const { data, error } = await supabase
-                .from('Categories')
-                .select('*');
-            if (error) console.error(error);
-            else console.log(data);
-        }
-
-        fetchCategories();
-    </script>
 </body>
 
 </html>
