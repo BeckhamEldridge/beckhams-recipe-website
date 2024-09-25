@@ -13,5 +13,3 @@ async function fetchCategories() {
 }
 
 fetchCategories();
-
-   <script type="module" src="assets/js/scripts.js"></script>
