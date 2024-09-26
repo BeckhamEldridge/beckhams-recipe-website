@@ -1,6 +1,4 @@
-// JavaScript file to handle future interactivity
-console.log("Website is loaded!");
-
+// Function to handle tab navigation
 function openTab(event, tabName) {
     // Hide all tab content
     const tabContents = document.getElementsByClassName("tab-content");
@@ -22,6 +20,26 @@ function openTab(event, tabName) {
 }
 
 // Automatically open the first tab on page load
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".tab-link").click();
+
+    async function fetchCategories() {
+        const { data, error } = await supabase
+            .from('Categories')
+            .select('*');
+
+        if (error) {
+            console.error(error);
+        } else {
+            // Log each category individually
+            data.forEach((category, index) => {
+                console.log(`Category ${index + 1}:`, category);
+            });
+        }
+    }
+
+    // Fetch categories once the DOM is fully loaded
+    fetchCategories();
 });
+
+console.log("Website is loaded!");
