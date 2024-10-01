@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Manage Categories</title>
+    <link rel="stylesheet" href="assets/css/category_styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="#">
+</head>
+
+<body>
+
+    <!-- Banner Section -->
+    <header class="banner">
+        <a href="index.html" class="home-link">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <h1>Manage Categories</h1>
+    </header>
+    <main>
+        <!-- Main Content Section -->
+        <div class="container">
+            <!-- Left Side: Add New Category -->
+            <div class="left-section">
+                <h2>Add a New Category</h2>
+                <form id="add-category-form">
+                    <label for="category-name">Category Name:</label>
+                    <input type="text" id="category-name" name="category-name" required>
+
+                    <label for="category-image">Select Banner Image:</label>
+                    <input type="file" id="category-image" name="category-image">
+
+                    <button type="submit">Add Category</button>
+                </form>
+            </div>
+
+            <!-- Right Side: List of Categories -->
+            <div class="right-section">
+                <h2>Existing Categories</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category Name</th>
+                            <th>Image Name</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Placeholder for now. Later populated with SQLite data -->
+                        <tr>
+                            <td>Category 1</td>
+                            <td>image1.jpg</td>
+                            <td><i class="fas fa-pencil-alt edit-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Category 2</td>
+                            <td>image2.jpg</td>
+                            <td><i class="fas fa-pencil-alt edit-icon"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <footer>
+    <p>© 2024 Beckham's Recipes. All rights reserved.</p>
+    </footer>
+
+    <script src="assets/js/category_scripts.js"></script>
+
+</body>
+
+</html>

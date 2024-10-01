@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+/* Banner styles */
+.banner {
+    background-image: url('../images/CategoriesBanner.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 2rem;
+}
+
+/* Home link inside banner */
+.home-link {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    color: #007bff; /* Blue color for the link */
+    font-size: .5em;
+    display: flex;
+    align-items: center;
+}
+
+.home-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+/* Layout for main container */
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.left-section, .right-section {
+    width: 48%;
+}
+
+/* Add Category Form Styles */
+#add-category-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#add-category-form input[type="text"],
+#add-category-form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#add-category-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+#add-category-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Category list table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+.edit-icon {
+    width: 24px;
+    cursor: pointer;
+}
+
+main {
+    flex-grow: 1; 
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .banner {
+        height: 4rem;
+    }
+    .banner h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner {
+        height: 4rem;
+    }
+    .banner h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Sticky footer */
+footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #333;
+    color: white;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+

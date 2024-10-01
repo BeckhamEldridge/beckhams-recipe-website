@@ -116,7 +116,7 @@ p {
 
 /* Main container (for spacing) */
 main {
-    flex-grow: 1; /* This ensures the footer sticks to the bottom */
+    flex-grow: 1; 
     padding: 20px;
 }
 
