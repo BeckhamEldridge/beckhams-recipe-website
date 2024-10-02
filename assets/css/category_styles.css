@@ -15,22 +15,22 @@ html, body {
 
 /* Banner styles */
 .banner {
-    background-image: url('../images/CategoriesBanner.jpg');
+    background-image: url('../images/CategoriesBanner2.jpg');
     background-size: cover;
     background-position: center;
-    height: 6rem;
+    height: 4em;
     display: flex;
     justify-content: center;
     align-items: center;
     color: black;
-    font-size: 2rem;
+    font-size: 2em;
 }
 
 /* Home link inside banner */
 .home-link {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 1em;
+    left: 1em;
     text-decoration: none;
     color: #007bff; /* Blue color for the link */
     font-size: .5em;
@@ -39,9 +39,9 @@ html, body {
 }
 
 .home-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: .5em;
 }
 
 /* Layout for main container */
@@ -53,6 +53,11 @@ html, body {
 
 .left-section, .right-section {
     width: 48%;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px; /* Optional for rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional for subtle shadow */
+    background-color: #f9f9f9; /* Optional background color */
 }
 
 /* Add Category Form Styles */
@@ -111,21 +116,74 @@ main {
     padding: 20px;
 }
 
+/* Adjust spacing between file button, file name, and thumbnail */
+.file-upload-wrapper {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+#file-name {
+    margin-left: 10px;
+    font-style: italic;
+}
+
+#thumbnail-container {
+    margin-top: 10px;
+}
+
+/* Divider between the file button and submit button */
+.divider {
+    border: 1px solid #ddd;
+    margin: 20px 0; /* Adds space above and below the line */
+}
+
+/* Right-align the submit button */
+.right-aligned {
+    float: right;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.right-aligned:hover {
+    background-color: #0056b3;
+}
+
+
 @media (max-width: 768px) {
     .banner {
-        height: 4rem;
+        height: 2em;
     }
     .banner h1 {
-        font-size: 2rem;
+        font-size: 1em;
+    }
+    .container {
+        flex-direction: column;
+    }
+
+    .left-section, .right-section {
+        width: 100%;
+        margin-bottom: 20px; /* Add some spacing between sections */
     }
 }
 
 @media (max-width: 480px) {
     .banner {
-        height: 4rem;
+        height: 2em;
     }
     .banner h1 {
-        font-size: 2rem;
+        font-size: 1em;
+    }
+    .container {
+        flex-direction: column;
+    }
+
+    .left-section, .right-section {
+        width: 100%;
+        margin-bottom: 20px; /* Add some spacing between sections */
     }
 }
 
