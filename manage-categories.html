@@ -54,23 +54,13 @@
                 <table>
                     <thead>
                         <tr>
+                            <th></th> <!-- Removed the header for the edit column -->
                             <th>Category Name</th>
-                            <th>Image Name</th>
-                            <th>Edit</th>
+                            <th>Image</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="category-list">
                         <!-- Placeholder for now. Later populated with SQLite data -->
-                        <tr>
-                            <td>Category 1</td>
-                            <td>image1.jpg</td>
-                            <td><i class="fas fa-pencil-alt edit-icon"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Category 2</td>
-                            <td>image2.jpg</td>
-                            <td><i class="fas fa-pencil-alt edit-icon"></i></td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -81,7 +71,6 @@
     </footer>
 
     <script src="assets/js/category_scripts.js"></script>
-
 </body>
 
 </html>

@@ -28,6 +28,36 @@ document.getElementById('category-image').addEventListener('change', function ()
     }
 });
 
+// Function to load categories from SQLite database
+function loadCategories() {
+    fetch('/api/categories') // This should match the route defined in server.js
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const categoryList = document.getElementById('category-list');
+            categoryList.innerHTML = ''; // Clear existing entries
+
+            // Populate the table with category data
+            data.forEach(category => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><i class="fas fa-pencil-alt edit-icon" onclick="editCategory(${category.id})"></i></td>
+                    <td>${category.CategoryName}</td>
+                    <td><img src="./assets/images/${category.CategoryImage}" class="category-image" alt="${category.CategoryName}"></td>
+                `;
+                categoryList.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error loading categories:', error));
+}
+
+// Call the loadCategories function to populate the table
+loadCategories();
+
 // Form submission logic
 document.getElementById('add-category-form').addEventListener('submit', function (event) {
     event.preventDefault();
