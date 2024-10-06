@@ -91,6 +91,7 @@ html, body {
 table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
 table, th, td {
@@ -100,6 +101,11 @@ table, th, td {
 th, td {
     padding: 15px;
     text-align: left;
+}
+
+th:first-child, td:first-child {
+    width: 50px; /* Width reduced to fit the pencil icon */
+    text-align: center; /* Center align the pencil icon */
 }
 
 th {
@@ -153,8 +159,8 @@ main {
 }
 
 .category-image {
-    width: 50px; /* Adjust the size of the thumbnail */
-    height: 50px; /* Adjust the size of the thumbnail */
+    width: 100px; /* Adjust the size of the thumbnail */
+    height: 30px; /* Adjust the size of the thumbnail */
     object-fit: cover; /* Keeps aspect ratio */
 }
 
@@ -202,4 +208,3 @@ footer {
     position: relative;
     bottom: 0;
 }
-
