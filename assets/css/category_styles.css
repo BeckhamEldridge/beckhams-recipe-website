@@ -15,15 +15,28 @@ html, body {
 
 /* Banner styles */
 .banner {
-    background-image: url('../images/CategoriesBanner2.jpg');
-    background-size: cover;
-    background-position: center;
+    position: relative;
     height: 4em;
     display: flex;
     justify-content: center;
     align-items: center;
     color: black;
     font-size: 2em;
+    z-index: 1;
+}
+
+.banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../images/CategoriesBanner.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.6; /* Adjust opacity here */
+    z-index: -1; /* Make sure this layer is behind the content */
 }
 
 /* Home link inside banner */
@@ -32,10 +45,15 @@ html, body {
     top: 1em;
     left: 1em;
     text-decoration: none;
-    color: #007bff; /* Blue color for the link */
+    color: #007bff;
     font-size: .5em;
     display: flex;
     align-items: center;
+    z-index: 2; /* Ensure the home link stays on top */
+}
+
+.banner h1 {
+    z-index: 2; /* Ensure the text stays on top */
 }
 
 .home-icon {
@@ -159,9 +177,9 @@ main {
 }
 
 .category-image {
-    width: 100px; /* Adjust the size of the thumbnail */
-    height: 30px; /* Adjust the size of the thumbnail */
-    object-fit: cover; /* Keeps aspect ratio */
+    width: 100px;
+    height: 30px;
+    object-fit: cover;
 }
 
 @media (max-width: 768px) {
