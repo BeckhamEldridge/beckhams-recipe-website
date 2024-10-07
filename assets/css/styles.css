@@ -17,15 +17,32 @@ html, body {
 
 /* Banner styling with background image */
 .banner {
-    background-image: url('../images/LandingPageBanner.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 6rem;
+    position: relative;
+    height: 6em;
     display: flex;
     justify-content: center;
     align-items: center;
     color: black;
-    font-size: 2rem;
+    font-size: 2em;
+    z-index: 1;
+}
+
+.banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../images/LandingPageBanner.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.4; /* Adjust opacity here */
+    z-index: -1; /* Make sure this layer is behind the content */
+}
+
+.banner h1 {
+    z-index: 2; /* Ensure the text stays on top */
 }
 
 p {

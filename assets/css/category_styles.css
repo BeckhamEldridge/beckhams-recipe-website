@@ -35,7 +35,7 @@ html, body {
     background-image: url('../images/CategoriesBanner.jpg');
     background-size: cover;
     background-position: center;
-    opacity: 0.6; /* Adjust opacity here */
+    opacity: 0.4; /* Adjust opacity here */
     z-index: -1; /* Make sure this layer is behind the content */
 }
 
