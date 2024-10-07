@@ -29,7 +29,7 @@
                 <form id="add-category-form">
                     <label for="category-name">Category Name:</label>
                     <input type="text" id="category-name" name="category-name" required>
-        
+
                     <label for="category-image">Select Banner Image:</label>
                     <div class="file-upload-wrapper">
                         <button type="button" id="custom-file-button">Select File</button>
@@ -37,12 +37,13 @@
                     </div>
                     <input type="file" id="category-image" name="category-image" style="display: none;">
                     <div id="thumbnail-container">
-                        <img id="image-preview" src="" alt="Image Preview" style="display: none; max-width: 100px; margin-top: 10px;">
+                        <img id="image-preview" src="" alt="Image Preview"
+                            style="display: none; max-width: 100px; margin-top: 10px;">
                     </div>
-        
+
                     <!-- Solid line with spacing above and below -->
                     <hr class="divider">
-        
+
                     <!-- Right-aligned Add Category button -->
                     <button type="submit" class="right-aligned">Add Category</button>
                 </form>
@@ -72,6 +73,12 @@
     </footer>
 
     <script src="assets/js/category_scripts.js"></script>
+
+    <div id="lightbox" class="lightbox">
+        <span id="close-lightbox">&times;</span>
+        <img id="lightbox-img" class="lightbox-content">
+    </div>
+
 </body>
 
 </html>

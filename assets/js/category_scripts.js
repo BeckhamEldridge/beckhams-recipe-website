@@ -28,9 +28,37 @@ document.getElementById('category-image').addEventListener('change', function ()
     }
 });
 
-// Function to load categories from SQLite database
+// Function to handle image click for lightbox
+function setupImageClickHandlers() {
+    const thumbnails = document.querySelectorAll('.category-image'); // Select all thumbnails
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeLightbox = document.getElementById('close-lightbox');
+
+    // Add click event listener for each thumbnail
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function () {
+            lightboxImg.src = thumbnail.src; // Set lightbox image source to thumbnail source
+            lightbox.style.display = 'flex'; // Show the lightbox
+        });
+    });
+
+    // Close the lightbox when clicking the close button
+    closeLightbox.addEventListener('click', function () {
+        lightbox.style.display = 'none'; // Hide the lightbox
+    });
+
+    // Close the lightbox when clicking outside the image
+    lightbox.addEventListener('click', function (event) {
+        if (event.target === lightbox) {
+            lightbox.style.display = 'none'; // Hide the lightbox
+        }
+    });
+}
+
+// Call the setupImageClickHandlers function after categories are loaded
 function loadCategories() {
-    fetch('/api/categories') // This should match the route defined in server.js
+    fetch('/api/categories')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -51,6 +79,9 @@ function loadCategories() {
                 `;
                 categoryList.appendChild(row);
             });
+
+            // Setup the lightbox after the categories are loaded
+            setupImageClickHandlers();
         })
         .catch(error => console.error('Error loading categories:', error));
 }
