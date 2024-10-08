@@ -41,6 +41,7 @@ window.onload = function () {
 
     // If running locally (localhost or 127.0.0.1), show the Admin tab
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        document.querySelector('.manage-tab').style.display = 'inline-block'; // Show Manage tab
         document.querySelector('.admin-tab').style.display = 'inline-block'; // Show Admin tab
     }
 
