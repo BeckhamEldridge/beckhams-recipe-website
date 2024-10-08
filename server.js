@@ -1,6 +1,8 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose(); // Import SQLite3
 const app = express();
+const fs = require('fs');
+const path = require('path');
 
 // Middleware to serve static files
 app.use(express.static(__dirname)); // Serve static files from root directory
@@ -31,6 +33,33 @@ app.get('/api/categories', (req, res) => {
         res.json(rows); // Send the categories as JSON
     });
 });
+
+// Function to write categories to JSON file
+app.get('/generate-category-json', (req, res) => {
+    const sql = 'SELECT CategoryName, CategoryImage FROM Categories ORDER BY CategoryName';
+
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+
+        const dirPath = path.join(__dirname, 'data', 'jsonfiles'); // Path to the directory
+        const filePath = path.join(dirPath, 'categories.json'); // Path to the JSON file
+
+        // Ensure the directory exists, if not, create it
+        if (!fs.existsSync(dirPath)) {
+            fs.mkdirSync(dirPath, { recursive: true }); // Create directory recursively if it doesn't exist
+        }
+
+        fs.writeFile(filePath, JSON.stringify(rows, null, 2), (err) => {
+            if (err) throw err;
+            console.log('Categories data written to JSON file.');
+            res.send('Categories JSON generated');
+        });
+    });
+});
+
 
 // Route for retrieving recipes (Example)
 app.get('/recipes', (req, res) => {

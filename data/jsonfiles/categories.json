@@ -1,0 +1,14 @@
+[
+  {
+    "CategoryName": "Appetizers",
+    "CategoryImage": "AppetizersBanner.jpg"
+  },
+  {
+    "CategoryName": "Breads & Grains",
+    "CategoryImage": "BreadsAndGrainsBanner.jpg"
+  },
+  {
+    "CategoryName": "Desserts",
+    "CategoryImage": "DesertsPageBanner.jpg"
+  }
+]

@@ -58,13 +58,8 @@ function setupImageClickHandlers() {
 
 // Call the setupImageClickHandlers function after categories are loaded
 function loadCategories() {
-    fetch('/api/categories')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
+    fetch('/data/jsonfiles/categories.json') // Point to static JSON file on Netlify
+        .then(response => response.json())
         .then(data => {
             const categoryList = document.getElementById('category-list');
             categoryList.innerHTML = ''; // Clear existing entries
@@ -73,15 +68,14 @@ function loadCategories() {
             data.forEach(category => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td><i class="fas fa-pencil-alt edit-icon" onclick="editCategory(${category.id})"></i></td>
+                    <td><i class="fas fa-pencil-alt edit-icon"></i></td>
                     <td>${category.CategoryName}</td>
-                    <td><img src="./assets/images/${category.CategoryImage}" class="category-image" alt="${category.CategoryName}"></td>
+                    <td><img src="./assets/images/${category.CategoryImage}" class="category-image"></td>
                 `;
                 categoryList.appendChild(row);
             });
 
-            // Setup the lightbox after the categories are loaded
-            setupImageClickHandlers();
+            setupImageClickHandlers(); // Re-setup lightbox for images
         })
         .catch(error => console.error('Error loading categories:', error));
 }

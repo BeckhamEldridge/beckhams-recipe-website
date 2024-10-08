@@ -36,4 +36,50 @@ function openTab(event, tabName) {
     event.currentTarget.classList.add("active");
 }
 
+window.onload = function () {
+    const hostname = window.location.hostname;
+
+    // If running locally (localhost or 127.0.0.1), show the Admin tab
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        document.querySelector('.admin-tab').style.display = 'inline-block'; // Show Admin tab
+    }
+
+    // Tab switching functionality
+    function openTab(evt, tabName) {
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabContents.forEach(content => content.classList.remove('active'));
+        document.getElementById(tabName).classList.add('active');
+
+        const tabLinks = document.querySelectorAll('.tab-link');
+        tabLinks.forEach(link => link.classList.remove('active'));
+        evt.currentTarget.classList.add('active');
+    }
+
+    // Add event listener to each tab-link element
+    const tabLinks = document.querySelectorAll('.tab-link');
+    tabLinks.forEach(tab => {
+        tab.addEventListener('click', function (e) {
+            openTab(e, tab.dataset.tab);
+        });
+    });
+
+    // Button event listener for generating the JSON
+    const generateButton = document.getElementById('generate-json-button');
+    if (generateButton) {
+        generateButton.addEventListener('click', function () {
+            fetch('/generate-category-json')
+                .then(response => response.text())
+                .then(data => {
+                    alert('Categories JSON file generated successfully.');
+                    console.log(data); // Logs server response
+                })
+                .catch(error => {
+                    console.error('Error generating JSON:', error);
+                    alert('Failed to generate JSON.');
+                });
+        });
+    }
+};
+
+
 console.log("Website is loaded!");

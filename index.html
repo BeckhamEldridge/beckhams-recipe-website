@@ -33,6 +33,10 @@
             <li class="tab-link" onclick="openTab(event, 'manage')">
                 <i class="fa fa-pencil"></i> Manage
             </li>
+            <!-- Conditional Admin Tab (Initially hidden) -->
+            <li class="tab-link admin-tab" style="display:none;" onclick="openTab(event, 'admin')">
+                <i class="fas fa-tools"></i> Admin
+            </li>
         </ul>
     </nav>
 
@@ -71,6 +75,11 @@
                 <li><a href="manage-categories.html">Manage Categories</a></li>
                 <li><a href="modify-tags.html">Modify Tags</a></li>
             </ul>
+        </section>
+        <!-- Admin Section (Initially hidden) -->
+        <section id="admin" class="tab-content">
+            <h2>Admin Tools</h2>
+            <button id="generate-json-button" class="right-aligned">Generate Categories JSON</button>
         </section>
     </main>
 
