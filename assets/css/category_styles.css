@@ -212,6 +212,20 @@ main {
     cursor: pointer;
 }
 
+#category-name-error-message {
+    color: red; /* Keep the error text red */
+    margin-bottom: 1rem; /* Adds space below the error message */
+}
+
+#image-error-message {
+    color: red; /* Keep the error text red */
+    margin-bottom: 1rem; /* Adds space below the error message */
+}
+
+.input-error {
+    border-color: red; /* Red border to indicate error */
+    background-color: #ffe6e6; /* Light red background to indicate error */
+}
 
 @media (max-width: 768px) {
     .banner {

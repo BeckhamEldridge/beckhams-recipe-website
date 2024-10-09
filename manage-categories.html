@@ -29,22 +29,24 @@
                 <form id="add-category-form">
                     <label for="category-name">Category Name:</label>
                     <input type="text" id="category-name" name="category-name" required>
+                    <p id="category-name-error-message" style="color: red; display: none;"></p>
+                    <!-- Error for category name -->
 
                     <label for="category-image">Select Banner Image:</label>
                     <div class="file-upload-wrapper">
                         <button type="button" id="custom-file-button">Select File</button>
                         <span id="file-name">No file selected</span>
                     </div>
-                    <input type="file" id="category-image" name="category-image" style="display: none;">
+                    <input type="file" id="category-image" name="category-image" accept="image/*"
+                        style="display: none;">
+
                     <div id="thumbnail-container">
                         <img id="image-preview" src="" alt="Image Preview"
                             style="display: none; max-width: 100px; margin-top: 10px;">
+                        <p id="image-error-message" style="color: red; display: none;"></p> <!-- Error for image -->
                     </div>
 
-                    <!-- Solid line with spacing above and below -->
                     <hr class="divider">
-
-                    <!-- Right-aligned Add Category button -->
                     <button type="submit" class="right-aligned">Add Category</button>
                 </form>
             </div>

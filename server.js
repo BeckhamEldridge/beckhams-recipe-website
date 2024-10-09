@@ -4,8 +4,9 @@ const app = express();
 const fs = require('fs');
 const path = require('path');
 
-// Middleware to serve static files
+// Middleware to serve static files and parse JSON requests
 app.use(express.static(__dirname)); // Serve static files from root directory
+app.use(express.json()); // Parse JSON request bodies
 
 // Connect to SQLite Database
 const db = new sqlite3.Database('./data/recipes.db', (err) => {
@@ -24,13 +25,36 @@ app.get('/', (req, res) => {
 // Route for retrieving categories
 app.get('/api/categories', (req, res) => {
     const sql = 'SELECT CategoryName, CategoryImage FROM Categories ORDER BY CategoryName';
-    
+
     db.all(sql, [], (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
         }
         res.json(rows); // Send the categories as JSON
+    });
+});
+
+// Route for inserting a new category into the database
+app.post('/api/categories', (req, res) => {
+    const { CategoryName, CategoryImage } = req.body;
+
+    if (!CategoryName || !CategoryImage) {
+        return res.status(400).json({ error: "CategoryName and CategoryImage are required" });
+    }
+
+    const sql = 'INSERT INTO Categories (CategoryName, CategoryImage) VALUES (?, ?)';
+    const params = [CategoryName, CategoryImage];
+
+    db.run(sql, params, function (err) {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+
+        res.json({
+            message: 'Category added successfully',
+            data: { id: this.lastID, CategoryName, CategoryImage }
+        });
     });
 });
 
@@ -59,7 +83,6 @@ app.get('/generate-category-json', (req, res) => {
         });
     });
 });
-
 
 // Route for retrieving recipes (Example)
 app.get('/recipes', (req, res) => {
