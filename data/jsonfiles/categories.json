@@ -4,11 +4,43 @@
     "CategoryImage": "AppetizersBanner.jpg"
   },
   {
-    "CategoryName": "Breads & Grains",
+    "CategoryName": "Breads and Grains",
     "CategoryImage": "BreadsAndGrainsBanner.jpg"
+  },
+  {
+    "CategoryName": "Breakfasts and Brunch",
+    "CategoryImage": "BreakfastAndBrunchBanner.jpg"
+  },
+  {
+    "CategoryName": "Condiments, Spices, and Dressings",
+    "CategoryImage": "CondimentsSpicesDressingsBanner.jpg"
+  },
+  {
+    "CategoryName": "Crock-Pot & Slow Cooker",
+    "CategoryImage": "CrockPotSlowCookersBanner.jpg"
   },
   {
     "CategoryName": "Desserts",
     "CategoryImage": "DesertsPageBanner.jpg"
+  },
+  {
+    "CategoryName": "Main Dishes and Entrees",
+    "CategoryImage": "MainDishesBanner.jpg"
+  },
+  {
+    "CategoryName": "Mexican",
+    "CategoryImage": "MexicanBanner.jpg"
+  },
+  {
+    "CategoryName": "Pasta and Italian",
+    "CategoryImage": "PastaAndItalianBanner.jpg"
+  },
+  {
+    "CategoryName": "Side Dishes",
+    "CategoryImage": "SideDishesBanner.jpg"
+  },
+  {
+    "CategoryName": "Soups, Chilis and Salads",
+    "CategoryImage": "SoupsChilisSaladsBanner.jpg"
   }
 ]

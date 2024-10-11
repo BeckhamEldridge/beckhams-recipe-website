@@ -5,16 +5,14 @@ document.getElementById('custom-file-button').addEventListener('click', function
     document.getElementById('category-image').click();
 });
 
-// Form submission logic
-document.getElementById('add-category-form').addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent form submission
-
+// Validation function to keep your logic reusable
+function validateForm(categories) {
     const categoryName = document.getElementById('category-name').value.trim();
     const categoryImage = document.getElementById('category-image').files[0];
     const categoryNameErrorMessage = document.getElementById('category-name-error-message');
     const imageErrorMessage = document.getElementById('image-error-message');
     const categoryInput = document.getElementById('category-name');
-
+    
     // Reset error styles and messages
     categoryInput.classList.remove('input-error');
     categoryNameErrorMessage.style.display = 'none';
@@ -27,23 +25,23 @@ document.getElementById('add-category-form').addEventListener('submit', function
         categoryNameErrorMessage.textContent = 'Category name must be between 3 and 50 characters long.';
         categoryNameErrorMessage.style.display = 'block';
         categoryInput.classList.add('input-error');
-        return; // Stop the form from submitting
+        return false; // Validation failed
     }
 
     // Step 2: Validate category name characters (only letters, numbers, spaces, dashes, underscores)
-    const categoryNameRegex = /^[a-zA-Z0-9\s-_]+$/; // Regex pattern for allowed characters
+    const categoryNameRegex = /^[a-zA-Z0-9\s-_,]+$/; // Regex pattern for allowed characters
     if (!categoryNameRegex.test(categoryName)) {
-        categoryNameErrorMessage.textContent = 'Category name contains invalid characters. Only letters, numbers, spaces, dashes (-), and underscores (_) are allowed.';
+        categoryNameErrorMessage.textContent = 'Category name contains invalid characters. Only letters, numbers, spaces, dashes (-), commas, and underscores (_) are allowed.';
         categoryNameErrorMessage.style.display = 'block';
         categoryInput.classList.add('input-error');
-        return; // Stop the form from submitting
+        return false; // Validation failed
     }
 
     // Step 3: Check if an image is selected
     if (!categoryImage) {
         imageErrorMessage.textContent = 'Please select an image.';
         imageErrorMessage.style.display = 'block';
-        return; // Stop the form from submitting
+        return false; // Validation failed
     }
 
     // Step 4: Verify the image is of a valid type (JPEG, PNG, or GIF)
@@ -51,14 +49,19 @@ document.getElementById('add-category-form').addEventListener('submit', function
     if (!validImageTypes.includes(categoryImage.type)) {
         imageErrorMessage.textContent = 'Please select a valid image file (JPEG, PNG, or GIF).';
         imageErrorMessage.style.display = 'block';
-        return; // Stop the form from submitting
+        return false; // Validation failed
     }
 
-    // If all validation passes, proceed with form submission logic
-    //alert(`Category Name: ${categoryName}\nSelected Image: ${categoryImage.name}`);
+    // Step 5: Check if the category name already exists
+    const categoryExists = categories.some(category => category.CategoryName.toLowerCase() === categoryName.toLowerCase());
+    if (categoryExists) {
+        categoryNameErrorMessage.textContent = 'Category name already exists. Please choose a different name.';
+        categoryNameErrorMessage.style.display = 'block';
+        return false; // Validation failed
+    }
 
-    // Add your form submission logic here (e.g., AJAX or submit the form)
-});
+    return true; // All validation passed
+}
 
 // Handle file selection and show file name + thumbnail
 document.getElementById('category-image').addEventListener('change', function () {
@@ -138,14 +141,48 @@ function loadCategories() {
 // Call the loadCategories function to populate the table
 loadCategories();
 
-// Form submission logic
-document.getElementById('add-category-form').addEventListener('submit', function (event) {
-    event.preventDefault();
+// Main form submission logic
+document.getElementById('add-category-form').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Prevent default form submission
 
-    const categoryName = document.getElementById('category-name').value;
-    const categoryImage = document.getElementById('category-image').files[0];
+    try {
+        const response = await fetch('/data/jsonfiles/categories.json');
+        const categories = await response.json();
 
-    //alert(`Category Name: ${categoryName}\nSelected Image: ${categoryImage ? categoryImage.name : 'No image selected'}`);
+        // First, validate the form
+        if (!validateForm(categories)) {
+            return; // Stop submission if validation fails
+        }
 
-    // Add your form submission logic here
+        // Continue with form submission logic if validation passes
+        const categoryName = document.getElementById('category-name').value.trim();
+        const categoryImage = document.getElementById('category-image').files[0];
+        const formData = new FormData();
+
+        formData.append('CategoryName', categoryName);
+        formData.append('CategoryImage', categoryImage);
+
+        // Submit data using fetch API
+        const result = await fetch('/api/categories', {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await result.json();
+
+        if (data.error) {
+            alert('Error: ' + data.error);
+        } else {
+            alert('Category added successfully!');
+
+            // Refresh the categories list and reset the form
+            loadCategories();
+            document.getElementById('add-category-form').reset();
+            document.getElementById('file-name').textContent = 'No file selected';
+            document.getElementById('image-preview').style.display = 'none';
+        }
+    } catch (error) {
+        console.error('Error adding category:', error);
+        alert('An error occurred while adding the category.');
+    }
 });

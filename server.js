@@ -3,6 +3,7 @@ const sqlite3 = require('sqlite3').verbose(); // Import SQLite3
 const app = express();
 const fs = require('fs');
 const path = require('path');
+const multer = require('multer');
 
 // Middleware to serve static files and parse JSON requests
 app.use(express.static(__dirname)); // Serve static files from root directory
@@ -14,6 +15,28 @@ const db = new sqlite3.Database('./data/recipes.db', (err) => {
         console.error('Error connecting to the database:', err.message);
     } else {
         console.log('Connected to the SQLite database.');
+    }
+});
+
+// Set up Multer for handling image uploads
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './assets/images/'); // Directory for saving images
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname); // Save the image with its original name
+    }
+});
+
+const upload = multer({
+    storage: storage,
+    fileFilter: function (req, file, cb) {
+        const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        if (validImageTypes.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(new Error('Invalid file type'));
+        }
     }
 });
 
@@ -36,8 +59,9 @@ app.get('/api/categories', (req, res) => {
 });
 
 // Route for inserting a new category into the database
-app.post('/api/categories', (req, res) => {
-    const { CategoryName, CategoryImage } = req.body;
+app.post('/api/categories', upload.single('CategoryImage'), (req, res) => {
+    const { CategoryName } = req.body;
+    const CategoryImage = req.file ? req.file.filename : null;
 
     if (!CategoryName || !CategoryImage) {
         return res.status(400).json({ error: "CategoryName and CategoryImage are required" });
@@ -51,9 +75,12 @@ app.post('/api/categories', (req, res) => {
             return res.status(500).json({ error: err.message });
         }
 
-        res.json({
-            message: 'Category added successfully',
-            data: { id: this.lastID, CategoryName, CategoryImage }
+        // After inserting the new category, regenerate the JSON file
+        generateCategoryJson(() => {
+            res.json({
+                message: 'Category added successfully',
+                data: { id: this.lastID, CategoryName, CategoryImage }
+            });
         });
     });
 });
@@ -99,6 +126,34 @@ process.on('SIGINT', () => {
         process.exit(0);
     });
 });
+
+function generateCategoryJson(callback) {
+    const sql = 'SELECT CategoryName, CategoryImage FROM Categories ORDER BY CategoryName';
+
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            console.error('Error generating category JSON:', err.message);
+            return callback(err);
+        }
+
+        const dirPath = path.join(__dirname, 'data', 'jsonfiles');
+        const filePath = path.join(dirPath, 'categories.json');
+
+        // Ensure the directory exists
+        if (!fs.existsSync(dirPath)) {
+            fs.mkdirSync(dirPath, { recursive: true });
+        }
+
+        fs.writeFile(filePath, JSON.stringify(rows, null, 2), (err) => {
+            if (err) {
+                console.error('Error writing JSON file:', err.message);
+                return callback(err);
+            }
+            console.log('Categories data written to JSON file.');
+            callback();
+        });
+    });
+}
 
 // Start the server
 const PORT = 3000;
