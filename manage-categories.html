@@ -20,56 +20,90 @@
         </a>
         <h1>Manage Categories</h1>
     </header>
+
     <main>
         <!-- Main Content Section -->
         <div class="container">
-            <!-- Left Side: Add New Category -->
+            
+            <!-- Left Section: Add and Edit Category -->
             <div class="left-section">
-                <h2>Add a New Category</h2>
-                <form id="add-category-form">
-                    <label for="category-name">Category Name:</label>
-                    <input type="text" id="category-name" name="category-name" required>
-                    <p id="category-name-error-message" style="color: red; display: none;"></p>
-                    <!-- Error for category name -->
+                
+                <!-- Box for Adding a New Category -->
+                <div class="category-box">
+                    <h2>Add a New Category</h2>
+                    <form id="add-category-form">
+                        <label for="category-name">Category Name:</label>
+                        <input type="text" id="category-name" name="category-name" required>
+                        <p id="category-name-error-message" style="color: red; display: none;"></p>
+                        
+                        <label for="category-image">Select Banner Image:</label>
+                        <div class="file-upload-wrapper">
+                            <button type="button" id="custom-file-button">Select File</button>
+                            <span id="file-name">No file selected</span>
+                        </div>
+                        <input type="file" id="category-image" name="category-image" accept="image/*" style="display: none;">
+                        
+                        <div id="thumbnail-container">
+                            <img id="image-preview" src="" alt="Image Preview" style="display: none; max-width: 100px; margin-top: 10px;">
+                            <p id="image-error-message" style="color: red; display: none;"></p>
+                        </div>
+                        
+                        <hr class="divider">
+                        <div class="right-aligned-container">
+                            <button type="submit">Add Category</button>
+                        </div>
+                    </form>
+                </div>
 
-                    <label for="category-image">Select Banner Image:</label>
-                    <div class="file-upload-wrapper">
-                        <button type="button" id="custom-file-button">Select File</button>
-                        <span id="file-name">No file selected</span>
-                    </div>
-                    <input type="file" id="category-image" name="category-image" accept="image/*"
-                        style="display: none;">
+                <!-- Box for Editing an Existing Category -->
+                <div class="category-box">
+                    <h2>Edit Category</h2>
+                    <form id="edit-category-form">
+                        <label for="edit-category-name">Category Name:</label>
+                        <input type="text" id="edit-category-name" name="edit-category-name" required>
+                        <p id="edit-category-name-error-message" style="color: red; display: none;"></p>
 
-                    <div id="thumbnail-container">
-                        <img id="image-preview" src="" alt="Image Preview"
-                            style="display: none; max-width: 100px; margin-top: 10px;">
-                        <p id="image-error-message" style="color: red; display: none;"></p> <!-- Error for image -->
-                    </div>
+                        <label for="edit-category-image">Select New Banner Image:</label>
+                        <div class="file-upload-wrapper">
+                            <button type="button" id="edit-file-button">Select File</button>
+                            <span id="edit-file-name">No file selected</span>
+                        </div>
+                        <input type="file" id="edit-category-image" name="edit-category-image" accept="image/*" style="display: none;">
 
-                    <hr class="divider">
-                    <button type="submit" class="right-aligned">Add Category</button>
-                </form>
+                        <div id="edit-thumbnail-container">
+                            <img id="edit-image-preview" src="" alt="Edit Image Preview" style="display: none; max-width: 100px; margin-top: 10px;">
+                            <p id="edit-image-error-message" style="color: red; display: none;"></p>
+                        </div>
+
+                        <hr class="divider">
+                        <div class="right-aligned-container">
+                            <button type="submit">Edit Category</button>
+                        </div>
+                    </form>
+                </div>
+                
             </div>
 
-            <!-- Right Side: List of Categories -->
+            <!-- Right Section: Existing Categories -->
             <div class="right-section">
                 <h2>Existing Categories</h2>
                 <br>
                 <table>
                     <thead>
                         <tr>
-                            <th></th> <!-- Removed the header for the edit column -->
+                            <th></th> <!-- Empty column for edit button -->
                             <th>Category Name</th>
                             <th>Image</th>
                         </tr>
                     </thead>
                     <tbody id="category-list">
-                        <!-- Placeholder for now. Later populated with SQLite data -->
+                        <!-- Placeholder for SQLite data -->
                     </tbody>
                 </table>
             </div>
         </div>
     </main>
+
     <footer>
         <p>© 2024 Beckham's Recipes. All rights reserved.</p>
     </footer>
