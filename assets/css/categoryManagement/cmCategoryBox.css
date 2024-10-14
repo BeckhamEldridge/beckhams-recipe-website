@@ -1,0 +1,135 @@
+.category-box {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+  }
+  
+  .category-box h2 {
+    margin-bottom: 20px;
+  }
+  
+  #add-category-form,
+  #edit-category-form {
+    display: flex;
+    flex-direction: column; /* Arrange form elements vertically */
+  }
+  
+  .right-aligned-container {
+    display: flex;
+    justify-content: flex-end; /* Align button to the right */
+  }
+  
+  #add-category-form label,
+  #edit-category-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  #add-category-form input[type="text"],
+  #add-category-form input[type="file"],
+  #edit-category-form input[type="text"],
+  #edit-category-form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  #add-category-form button,
+  #edit-category-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    display: inline-block;
+  }
+  
+  #add-category-form button:hover,
+  #edit-category-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Edit Category specific styling */
+  #edit-file-button {
+    background-color: #ff9900;
+  }
+  
+  #edit-file-button:hover {
+    background-color: #cc7a00;
+  }
+  
+  #edit-category-name-error-message,
+  #edit-image-error-message {
+    color: red;
+    margin-bottom: 1rem;
+  }
+  
+  #edit-thumbnail-container {
+    margin-top: 10px;
+  }
+  
+  #edit-image-preview {
+    display: none;
+    max-width: 100px;
+    margin-top: 10px;
+  }
+  
+  .file-upload-wrapper {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  #file-name, #edit-file-name {
+    margin-left: 10px;
+    font-style: italic;
+  }
+  
+  #thumbnail-container, #edit-thumbnail-container {
+    margin-top: 10px;
+  }
+  
+  .divider {
+    border: 1px solid #ddd;
+    margin: 20px 0;
+  }
+  
+  .right-aligned {
+    float: right;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .right-aligned:hover {
+    background-color: #0056b3;
+  }
+
+  .category-image {
+    width: 200px;
+    /* height: 60px; */
+    object-fit: cover;
+    cursor: pointer;
+}
+
+  #category-name-error-message {
+    color: red; /* Keep the error text red */
+    margin-bottom: 1rem; /* Adds space below the error message */
+}
+
+#image-error-message {
+    color: red; /* Keep the error text red */
+    margin-bottom: 1rem; /* Adds space below the error message */
+}
+
+.input-error {
+    border-color: red; /* Red border to indicate error */
+    background-color: #ffe6e6; /* Light red background to indicate error */
+}

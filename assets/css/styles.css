@@ -34,7 +34,7 @@ html, body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('../images/LandingPageBanner.jpg');
+    background-image: url('/assets/images/LandingPageBanner.jpg');
     background-size: cover;
     background-position: center;
     opacity: 0.4; /* Adjust opacity here */

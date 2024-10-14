@@ -12,7 +12,7 @@ function validateForm(categories) {
     const categoryNameErrorMessage = document.getElementById('category-name-error-message');
     const imageErrorMessage = document.getElementById('image-error-message');
     const categoryInput = document.getElementById('category-name');
-    
+
     // Reset error styles and messages
     categoryInput.classList.remove('input-error');
     categoryNameErrorMessage.style.display = 'none';
@@ -128,7 +128,7 @@ function loadCategories() {
                 row.innerHTML = `
                     <td><i class="fas fa-pencil-alt edit-icon"></i></td>
                     <td>${category.CategoryName}</td>
-                    <td><img src="./assets/images/${category.CategoryImage}" class="category-image"></td>
+                    <td><img src="/assets/images/${category.CategoryImage}" class="category-image"></td>
                 `;
                 categoryList.appendChild(row);
             });
