@@ -31,10 +31,10 @@
     <main>
         <!-- Main Content Section -->
         <div class="container">
-            
+
             <!-- Left Section: Add and Edit Category -->
             <div class="left-section">
-                
+
                 <!-- Box for Adding a New Category -->
                 <div class="category-box">
                     <h2>Add a New Category</h2>
@@ -42,19 +42,21 @@
                         <label for="category-name">Category Name:</label>
                         <input type="text" id="category-name" name="category-name" required>
                         <p id="category-name-error-message" style="color: red; display: none;"></p>
-                        
+
                         <label for="category-image">Select Banner Image:</label>
                         <div class="file-upload-wrapper">
                             <button type="button" id="custom-file-button">Select New Category Image</button>
                             <span id="file-name">No file selected</span>
                         </div>
-                        <input type="file" id="category-image" name="category-image" accept="image/*" style="display: none;">
-                        
+                        <input type="file" id="category-image" name="category-image" accept="image/*"
+                            style="display: none;">
+
                         <div id="thumbnail-container">
-                            <img id="image-preview" src="" alt="Image Preview" style="display: none; max-width: 100px; margin-top: 10px;">
+                            <img id="image-preview" src="" alt="Image Preview"
+                                style="display: none; max-width: 100px; margin-top: 10px;">
                             <p id="image-error-message" style="color: red; display: none;"></p>
                         </div>
-                        
+
                         <hr class="divider">
                         <div class="right-aligned-container">
                             <button type="submit">Add Category</button>
@@ -66,6 +68,12 @@
                 <div class="category-box">
                     <h2>Edit Category</h2>
                     <form id="edit-category-form">
+
+                        <div style="display: flex;">
+                            <label for="edit-category-id">Category ID:</label>
+                            <input type="text" id="edit-category-id" name="edit-category-id" disabled>
+                        </div>
+
                         <label for="edit-category-name">Category Name:</label>
                         <input type="text" id="edit-category-name" name="edit-category-name" required>
                         <p id="edit-category-name-error-message" style="color: red; display: none;"></p>
@@ -75,20 +83,22 @@
                             <button type="button" id="edit-file-button">Select Replacement Category Image</button>
                             <span id="edit-file-name">No file selected</span>
                         </div>
-                        <input type="file" id="edit-category-image" name="edit-category-image" accept="image/*" style="display: none;">
+                        <input type="file" id="edit-category-image" name="edit-category-image" accept="image/*"
+                            style="display: none;">
 
                         <div id="edit-thumbnail-container">
-                            <img id="edit-image-preview" src="" alt="Edit Image Preview" style="display: none; max-width: 100px; margin-top: 10px;">
+                            <img id="edit-image-preview" src="" alt="Edit Image Preview"
+                                style="display: none; max-width: 100px; margin-top: 10px;">
                             <p id="edit-image-error-message" style="color: red; display: none;"></p>
                         </div>
 
                         <hr class="divider">
                         <div class="right-aligned-container">
-                            <button type="submit">Edit Category</button>
+                            <button type="submit">Update Category</button>
                         </div>
                     </form>
                 </div>
-                
+
             </div>
 
             <!-- Right Section: Existing Categories -->
@@ -99,6 +109,7 @@
                     <thead>
                         <tr>
                             <th></th> <!-- Empty column for edit button -->
+                            <th>ID</th>
                             <th>Category Name</th>
                             <th>Image</th>
                         </tr>

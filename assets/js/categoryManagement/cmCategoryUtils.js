@@ -7,12 +7,13 @@ export function addCustomFileButtonClickListener(customFileButtonId, categoryIma
   customFileButton.addEventListener('click', () => categoryImage.click());
 }
 
-export function validateForm(categories) {
-  const categoryName = document.getElementById('category-name').value.trim();
-  const categoryImage = document.getElementById('category-image').files[0];
-  const categoryNameErrorMessage = document.getElementById('category-name-error-message');
-  const imageErrorMessage = document.getElementById('image-error-message');
-  const categoryInput = document.getElementById('category-name');
+export function validateForm(categories, formConfig) {
+
+  const categoryName = document.getElementById(formConfig.categoryNameId).value.trim();
+  const categoryImage = document.getElementById(formConfig.categoryImageId).files[0];
+  const categoryNameErrorMessage = document.getElementById(formConfig.categoryNameErrorMessageId);
+  const imageErrorMessage = document.getElementById(formConfig.imageErrorMessageId);
+  const categoryInput = document.getElementById(formConfig.categoryNameId);
 
   // Reset error styles and messages
   categoryInput.classList.remove('input-error');

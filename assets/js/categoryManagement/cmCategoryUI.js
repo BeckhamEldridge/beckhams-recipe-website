@@ -33,12 +33,25 @@ export function loadCategories(categoryListId, editIconClass, categoryImageClass
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td><i class="${editIconClass}"></i></td>
+                    <td>${category.CategoryID}</td>
                     <td>${category.CategoryName}</td>
                     <td><img src="/assets/images/${category.CategoryImage}" class="${categoryImageClass}"></td>
                 `;
                 categoryList.appendChild(row);
+
+                // Add edit functionality
+                const editIcon = row.querySelector(`.${editIconClass.split(' ').join('.')}`);
+                editIcon.addEventListener('click', () => {
+                    // Populate the edit form with the selected row's data
+                    document.getElementById('edit-category-name').value = category.CategoryName;
+                    document.getElementById('edit-image-preview').src = `/assets/images/${category.CategoryImage}`;
+                    document.getElementById('edit-image-preview').style.display = 'block';
+                    document.getElementById('edit-category-id').value = category.CategoryID;
+                    document.getElementById('edit-file-name').textContent = category.CategoryImage;
+                });
             });
 
+            // Setup the image click handlers
             setupImageClickHandlers(
                 '.' + categoryImageClass, // Select all thumbnails
                 'lightbox',

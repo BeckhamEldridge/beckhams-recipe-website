@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
 
 // Route for retrieving categories
 app.get('/api/categories', (req, res) => {
-    const sql = 'SELECT CategoryName, CategoryImage FROM Categories ORDER BY CategoryName';
+    const sql = 'SELECT CategoryID, CategoryName, CategoryImage FROM Categories ORDER BY CategoryName';
 
     db.all(sql, [], (err, rows) => {
         if (err) {
@@ -87,7 +87,7 @@ app.post('/api/categories', upload.single('CategoryImage'), (req, res) => {
 
 // Function to write categories to JSON file
 app.get('/generate-category-json', (req, res) => {
-    const sql = 'SELECT CategoryName, CategoryImage FROM Categories ORDER BY CategoryName';
+    const sql = 'SELECT CategoryID, CategoryName, CategoryImage FROM Categories ORDER BY CategoryName';
 
     db.all(sql, [], (err, rows) => {
         if (err) {
@@ -127,8 +127,45 @@ process.on('SIGINT', () => {
     });
 });
 
+// PATCH endpoint to update an existing category
+app.patch('/api/categories/:id', upload.single('CategoryImage'), (req, res) => {
+    const { CategoryName } = req.body;
+    const CategoryImage = req.file ? req.file.filename : null;
+    const { id } = req.params;
+
+    if (!CategoryName) {
+        return res.status(400).json({ error: "CategoryName is required" });
+    }
+
+    // Prepare SQL query with conditional update for the image
+    let sql = 'UPDATE Categories SET CategoryName = ?';
+    const params = [CategoryName];
+
+    if (CategoryImage) {
+        sql += ', CategoryImage = ?';
+        params.push(CategoryImage);
+    }
+
+    sql += ' WHERE CategoryID = ?'; // Ensure you're using CategoryID to update the correct record
+    params.push(id);
+
+    db.run(sql, params, function (err) {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+
+        // After updating the category, regenerate the JSON file
+        generateCategoryJson(() => {
+            res.json({
+                message: 'Category updated successfully',
+                data: { id, CategoryName, CategoryImage }
+            });
+        });
+    });
+});
+
 function generateCategoryJson(callback) {
-    const sql = 'SELECT CategoryName, CategoryImage FROM Categories ORDER BY CategoryName';
+    const sql = 'SELECT CategoryID, CategoryName, CategoryImage FROM Categories ORDER BY CategoryName';
 
     db.all(sql, [], (err, rows) => {
         if (err) {

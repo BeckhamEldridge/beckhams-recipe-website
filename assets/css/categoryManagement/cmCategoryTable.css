@@ -17,6 +17,13 @@ table {
     width: 50px; /* Width reduced to fit the pencil icon */
     text-align: center; /* Center align the pencil icon */
   }
+
+  th:nth-child(2), td:nth-child(2) {
+    width: 50px;
+    text-align: center;
+  }
+
+  th:
   
   th {
     background-color: #f4f4f4;
