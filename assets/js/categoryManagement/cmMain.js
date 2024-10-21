@@ -19,7 +19,8 @@ handleFileSelection(
 loadCategories(
     'category-list', // ID of the category list element
     'fas fa-pencil-alt edit-icon', // Class for the edit icon
-    'category-image' // Class for the category image
+    'category-image', // Class for the category image
+    'fas fa-trash delete-icon', // Class for the edit icon
 );
 
 // Handle form submission

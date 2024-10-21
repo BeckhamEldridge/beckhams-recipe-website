@@ -30,7 +30,7 @@ export function handleFormSubmission(formId, validateFormFn, loadCategoriesFn, s
             } else {
                 alert(successMessage);
                 // loadCategoriesFn();
-                loadCategoriesFn('category-list', 'fas fa-pencil-alt edit-icon', 'category-image');
+                loadCategoriesFn('category-list', 'fas fa-pencil-alt edit-icon', 'category-image','fas fa-trash delete-icon');
                 // Reset the form
                 document.getElementById('add-category-form').reset();
                 document.getElementById('file-name').textContent = 'No file selected';
@@ -81,7 +81,7 @@ export function handleEditFormSubmission(formId, validateFormFn, loadCategoriesF
             } else {
                 alert(successMessage);
                 // Reload the categories list
-                loadCategoriesFn('category-list', 'fas fa-pencil-alt edit-icon', 'category-image');
+                loadCategoriesFn('category-list', 'fas fa-pencil-alt edit-icon', 'category-image','fas fa-trash delete-icon');
                 // Reset the form
                 document.getElementById(formId).reset();
                 document.getElementById('edit-file-name').textContent = 'No file selected';

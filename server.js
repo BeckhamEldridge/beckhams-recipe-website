@@ -116,6 +116,25 @@ app.get('/recipes', (req, res) => {
     res.json([{ id: 1, name: 'Pasta' }, { id: 2, name: 'Pizza' }]); // Send JSON
 });
 
+// Route to get a category by ID
+app.get('/api/categories/:id', (req, res) => {
+    const { id } = req.params; // Extract the ID from the request parameters
+    const sql = 'SELECT CategoryID, CategoryName, CategoryImage FROM Categories WHERE CategoryID = ?';
+
+    db.get(sql, [id], (err, row) => {
+        if (err) {
+            console.error('Error:', err.message);
+            return res.status(500).json({ error: 'Error retrieving the category' });
+        }
+
+        if (!row) {
+            return res.status(404).json({ error: 'Category not found' });
+        }
+
+        res.json(row); // Send the category details as JSON
+    });
+});
+
 // Close the database connection when the server is shut down
 process.on('SIGINT', () => {
     db.close((err) => {
@@ -160,6 +179,29 @@ app.patch('/api/categories/:id', upload.single('CategoryImage'), (req, res) => {
                 message: 'Category updated successfully',
                 data: { id, CategoryName, CategoryImage }
             });
+        });
+    });
+});
+
+// Route for deleting a category
+app.delete('/api/categories/:id', (req, res) => {
+    const { id } = req.params;
+
+    // Proceed directly with the deletion of the category
+    const deleteSql = 'DELETE FROM Categories WHERE CategoryID = ?';
+
+    db.run(deleteSql, [id], function (err) {
+        if (err) {
+            return res.status(500).json({ error: 'Error deleting category' });
+        }
+
+        if (this.changes === 0) {
+            return res.status(404).json({ error: 'Category not found' });
+        }
+
+        // After deletion, regenerate the JSON file
+        generateCategoryJson(() => {
+            res.json({ message: 'Category deleted successfully' });
         });
     });
 });

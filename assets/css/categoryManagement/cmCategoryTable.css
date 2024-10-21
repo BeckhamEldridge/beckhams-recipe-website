@@ -23,13 +23,21 @@ table {
     text-align: center;
   }
 
-  th:
+  th:nth-child(5), td:nth-child(5) {
+    width: 50px;
+    text-align: center;
+  }
   
   th {
     background-color: #f4f4f4;
   }
   
   .edit-icon {
+    width: 24px;
+    cursor: pointer;
+  }
+
+  .delete-icon  {
     width: 24px;
     cursor: pointer;
   }

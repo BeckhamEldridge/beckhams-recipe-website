@@ -22,7 +22,7 @@ export function setupImageClickHandlers(thumbnailsSelector, lightboxId, lightbox
     });
 }
 
-export function loadCategories(categoryListId, editIconClass, categoryImageClass) {
+export function loadCategories(categoryListId, editIconClass, categoryImageClass, deleteIconClass) {
     fetch('/data/jsonfiles/categories.json')
         .then(response => response.json())
         .then(data => {
@@ -36,6 +36,7 @@ export function loadCategories(categoryListId, editIconClass, categoryImageClass
                     <td>${category.CategoryID}</td>
                     <td>${category.CategoryName}</td>
                     <td><img src="/assets/images/${category.CategoryImage}" class="${categoryImageClass}"></td>
+                    <td><i class="${deleteIconClass}" data-category-id="${category.CategoryID}"></i></td>
                 `;
                 categoryList.appendChild(row);
 
@@ -48,6 +49,32 @@ export function loadCategories(categoryListId, editIconClass, categoryImageClass
                     document.getElementById('edit-image-preview').style.display = 'block';
                     document.getElementById('edit-category-id').value = category.CategoryID;
                     document.getElementById('edit-file-name').textContent = category.CategoryImage;
+                });
+
+
+                // Add delete functionality
+                const deleteIcon = row.querySelector(`.${deleteIconClass.split(' ').join('.')}`);
+                deleteIcon.addEventListener('click', () => {
+                    const categoryId = category.CategoryID;
+
+                    // Confirm deletion
+                    if (confirm(`Are you sure you want to delete the category "${category.CategoryName}"? This action cannot be undone.`)) {
+                        fetch(`/api/categories/${categoryId}`, {
+                            method: 'DELETE',
+                        })
+                            .then(response => response.json())
+                            .then(result => {
+                                if (result.error) {
+                                    alert(result.error);
+                                } else {
+                                    alert(result.message);
+                                    loadCategories(categoryListId, editIconClass, categoryImageClass, deleteIconClass); // Reload the categories
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error deleting category:', error);
+                            });
+                    }
                 });
             });
 
