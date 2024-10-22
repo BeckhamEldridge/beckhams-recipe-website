@@ -1,0 +1,43 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    padding: 15px;
+    text-align: left;
+  }
+  
+  th:first-child, td:first-child {
+    width: 50px; /* Width reduced to fit the pencil icon */
+    text-align: center; /* Center align the pencil icon */
+  }
+
+  th:nth-child(2), td:nth-child(2) {
+    width: 50px;
+    text-align: center;
+  }
+
+  th:nth-child(5), td:nth-child(5) {
+    width: 50px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+  }
+  
+  .edit-icon {
+    width: 24px;
+    cursor: pointer;
+  }
+
+  .delete-icon  {
+    width: 24px;
+    cursor: pointer;
+  }

@@ -1,0 +1,46 @@
+.banner {
+    position: relative;
+    height: 4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 2em;
+    z-index: 1;
+  }
+  
+  .banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/assets/images/CategoriesBanner.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.4; /* Adjust opacity here */
+    z-index: -1; /* Make sure this layer is behind the content */
+  }
+  
+  .home-link {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    text-decoration: none;
+    color: #007bff;
+    font-size: .5em;
+    display: flex;
+    align-items: center;
+    z-index: 2; /* Ensure the home link stays on top */
+  }
+  
+  .banner h1 {
+    z-index: 2; /* Ensure the text stays on top */
+  }
+  
+  .home-icon {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: .5em;
+  }

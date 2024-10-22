@@ -1,0 +1,41 @@
+@media (max-width: 768px) {
+    .banner {
+        height: 2em;
+    }
+
+    .banner h1 {
+        font-size: 1em;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .left-section,
+    .right-section {
+        width: 100%;
+        margin-bottom: 20px;
+        /* Add some spacing between sections */
+    }
+}
+
+@media (max-width: 480px) {
+    .banner {
+        height: 2em;
+    }
+
+    .banner h1 {
+        font-size: 1em;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .left-section,
+    .right-section {
+        width: 100%;
+        margin-bottom: 20px;
+        /* Add some spacing between sections */
+    }
+}

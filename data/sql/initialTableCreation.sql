@@ -3,3 +3,9 @@ CREATE TABLE Categories (
     CategoryName TEXT NOT NULL UNIQUE,
     CategoryImage TEXT NULL
 );
+
+CREATE TABLE Tags (
+    TagID INTEGER PRIMARY KEY AUTOINCREMENT,
+    TagName TEXT NOT NULL UNIQUE,
+    TagImage TEXT NULL
+);

@@ -64,7 +64,7 @@ window.onload = function () {
         });
     });
 
-    // Button event listener for generating the JSON
+    // Button event listener for generating the Category JSON
     const generateButton = document.getElementById('generate-json-button');
     if (generateButton) {
         generateButton.addEventListener('click', function () {
@@ -80,6 +80,23 @@ window.onload = function () {
                 });
         });
     }
+
+// Button event listener for generating the Tag JSON
+const generateTagButton = document.getElementById('generate-tag-json-button');
+if (generateTagButton) {
+    generateTagButton.addEventListener('click', function () {
+        fetch('/generate-tag-json')
+            .then(response => response.text())
+            .then(data => {
+                alert('Tags JSON file generated successfully.');
+                console.log(data); // Logs server response
+            })
+            .catch(error => {
+                console.error('Error generating JSON:', error);
+                alert('Failed to generate JSON.');
+            });
+    });
+}
 };
 
 

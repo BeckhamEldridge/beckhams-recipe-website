@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Manage Tags</title>
+    <!-- <link rel="stylesheet" href="assets/css/tag_styles.css"> -->
+    <link rel="stylesheet" href="assets/css/tagManagement/tmBase.css">
+    <link rel="stylesheet" href="assets/css/tagManagement/tmLayout.css">
+    <link rel="stylesheet" href="assets/css/tagManagement/tmBanner.css">
+    <link rel="stylesheet" href="assets/css/tagManagement/tmTagBox.css">
+    <link rel="stylesheet" href="assets/css/tagManagement/tmTagTable.css">
+    <link rel="stylesheet" href="assets/css/tagManagement/tmLightbox.css">
+    <link rel="stylesheet" href="assets/css/tagManagement/tmMediaQueries.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="#">
+</head>
+
+<body>
+
+    <!-- Banner Section -->
+    <header class="banner">
+        <a href="index.html" class="home-link">
+            <i class="fas fa-home"></i>
+        </a>
+        <h1>Manage Tags</h1>
+    </header>
+
+    <main>
+        <!-- Main Content Section -->
+        <div class="container">
+
+            <!-- Left Section: Add and Edit Tag -->
+            <div class="left-section">
+
+                <!-- Box for Adding a New Tag -->
+                <div class="tag-box">
+                    <h2>Add a New Tag</h2>
+                    <form id="add-tag-form">
+                        <label for="tag-name">Tag Name:</label>
+                        <input type="text" id="tag-name" name="tag-name" required>
+                        <p id="tag-name-error-message" style="color: red; display: none;"></p>
+
+                        <label for="tag-image">Select Banner Image:</label>
+                        <div class="file-upload-wrapper">
+                            <button type="button" id="custom-file-button">Select New Tag Image</button>
+                            <span id="file-name">No file selected</span>
+                        </div>
+                        <input type="file" id="tag-image" name="tag-image" accept="image/*"
+                            style="display: none;">
+
+                        <div id="thumbnail-container">
+                            <img id="image-preview" src="" alt="Image Preview"
+                                style="display: none; max-width: 100px; margin-top: 10px;">
+                            <p id="image-error-message" style="color: red; display: none;"></p>
+                        </div>
+
+                        <hr class="divider">
+                        <div class="right-aligned-container">
+                            <button type="submit">Add Tag</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Box for Editing an Existing Tag -->
+                <div class="tag-box">
+                    <h2>Edit Tag</h2>
+                    <form id="edit-tag-form">
+
+                        <div style="display: flex;">
+                            <label for="edit-tag-id">Tag ID:</label>
+                            <input type="text" id="edit-tag-id" name="edit-tag-id" disabled>
+                        </div>
+
+                        <label for="edit-tag-name">Tag Name:</label>
+                        <input type="text" id="edit-tag-name" name="edit-tag-name" required>
+                        <p id="edit-tag-name-error-message" style="color: red; display: none;"></p>
+
+                        <label for="edit-tag-image">Select New Banner Image:</label>
+                        <div class="file-upload-wrapper">
+                            <button type="button" id="edit-file-button">Select Replacement Tag Image</button>
+                            <span id="edit-file-name">No file selected</span>
+                        </div>
+                        <input type="file" id="edit-tag-image" name="edit-tag-image" accept="image/*"
+                            style="display: none;">
+
+                        <div id="edit-thumbnail-container">
+                            <img id="edit-image-preview" src="" alt="Edit Image Preview"
+                                style="display: none; max-width: 100px; margin-top: 10px;">
+                            <p id="edit-image-error-message" style="color: red; display: none;"></p>
+                        </div>
+
+                        <hr class="divider">
+                        <div class="right-aligned-container">
+                            <button type="submit">Update Tag</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- Right Section: Existing Tags -->
+            <div class="right-section">
+                <h2>Existing Tags</h2>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th> <!-- Empty column for edit icon -->
+                            <th>ID</th>
+                            <th>Tag Name</th>
+                            <th>Image</th>
+                            <th></th> <!-- Empty column for delete icon -->
+                        </tr>
+                    </thead>
+                    <tbody id="tag-list">
+                        <!-- Placeholder for SQLite data -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 Beckham's Recipes. All rights reserved.</p>
+    </footer>
+
+    <!-- <script src="assets/js/tag_scripts.js"></script> -->
+    <script type="module" src="/assets/js/tagManagement/tmTagUtils.js"></script>
+    <script type="module" src="/assets/js/tagManagement/tmTagUI.js"></script>
+    <script type="module" src="/assets/js/tagManagement/tmTagForm.js"></script>
+    <script type="module" src="/assets/js/tagManagement/tmMain.js"></script>
+
+    <div id="lightbox" class="lightbox">
+        <span id="close-lightbox">&times;</span>
+        <img id="lightbox-img" class="lightbox-content">
+    </div>
+
+</body>
+
+</html>

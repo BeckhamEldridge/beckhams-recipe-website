@@ -1,0 +1,135 @@
+.tag-box {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+  }
+  
+  .tag-box h2 {
+    margin-bottom: 20px;
+  }
+  
+  #add-tag-form,
+  #edit-tag-form {
+    display: flex;
+    flex-direction: column; /* Arrange form elements vertically */
+  }
+  
+  .right-aligned-container {
+    display: flex;
+    justify-content: flex-end; /* Align button to the right */
+  }
+  
+  #add-tag-form label,
+  #edit-tag-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  #add-tag-form input[type="text"],
+  #add-tag-form input[type="file"],
+  #edit-tag-form input[type="text"],
+  #edit-tag-form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  #add-tag-form button,
+  #edit-tag-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    display: inline-block;
+  }
+  
+  #add-tag-form button:hover,
+  #edit-tag-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Edit Category specific styling */
+  #edit-file-button {
+    background-color: #ff9900;
+  }
+  
+  #edit-file-button:hover {
+    background-color: #cc7a00;
+  }
+  
+  #edit-tag-name-error-message,
+  #edit-image-error-message {
+    color: red;
+    margin-bottom: 1rem;
+  }
+  
+  #edit-thumbnail-container {
+    margin-top: 10px;
+  }
+  
+  #edit-image-preview {
+    display: none;
+    max-width: 100px;
+    margin-top: 10px;
+  }
+  
+  .file-upload-wrapper {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  #file-name, #edit-file-name {
+    margin-left: 10px;
+    font-style: italic;
+  }
+  
+  #thumbnail-container, #edit-thumbnail-container {
+    margin-top: 10px;
+  }
+  
+  .divider {
+    border: 1px solid #ddd;
+    margin: 20px 0;
+  }
+  
+  .right-aligned {
+    float: right;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .right-aligned:hover {
+    background-color: #0056b3;
+  }
+
+  .tag-image {
+    width: 200px;
+    /* height: 60px; */
+    object-fit: cover;
+    cursor: pointer;
+}
+
+  #tag-name-error-message {
+    color: red; /* Keep the error text red */
+    margin-bottom: 1rem; /* Adds space below the error message */
+}
+
+#image-error-message {
+    color: red; /* Keep the error text red */
+    margin-bottom: 1rem; /* Adds space below the error message */
+}
+
+.input-error {
+    border-color: red; /* Red border to indicate error */
+    background-color: #ffe6e6; /* Light red background to indicate error */
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "TagID": 2,
+    "TagName": "Aunt Ednas Kitchen",
+    "TagImage": "AuntEdnasKitchen.jpg"
+  },
+  {
+    "TagID": 3,
+    "TagName": "Aunt Marthas Kitchen",
+    "TagImage": "AunMarthasKitchen.jpg"
+  },
+  {
+    "TagID": 1,
+    "TagName": "Favorites",
+    "TagImage": "FavoritesBanner.jpg"
+  },
+  {
+    "TagID": 4,
+    "TagName": "Forks Over Knives",
+    "TagImage": "ForksOverKnivesBanner.jpg"
+  },
+  {
+    "TagID": 5,
+    "TagName": "Happy Herbivore",
+    "TagImage": "HappyHerbivoreBanner.jpg"
+  },
+  {
+    "TagID": 6,
+    "TagName": "Meal Plans",
+    "TagImage": "MealPlansBanner.jpg"
+  },
+  {
+    "TagID": 7,
+    "TagName": "Mom Eldridge Kitchen - Betty Ann Eldridge",
+    "TagImage": "MomEldridgesKitchen.jpg"
+  },
+  {
+    "TagID": 8,
+    "TagName": "Vegan",
+    "TagImage": "VeganBanner.jpg"
+  },
+  {
+    "TagID": 9,
+    "TagName": "Vegetarian",
+    "TagImage": "VegetarianBanner.jpg"
+  }
+]

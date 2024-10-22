@@ -234,6 +234,179 @@ function generateCategoryJson(callback) {
     });
 }
 
+// Route for retrieving tags
+app.get('/api/tags', (req, res) => {
+    const sql = 'SELECT TagID, TagName, TagImage FROM Tags ORDER BY TagName';
+
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(rows); // Send the tags as JSON
+    });
+});
+
+// Route for inserting a new tag into the database
+app.post('/api/tags', upload.single('TagImage'), (req, res) => {
+    const { TagName } = req.body;
+    const TagImage = req.file ? req.file.filename : null;
+
+    if (!TagName || !TagImage) {
+        return res.status(400).json({ error: "TagName and TagImage are required" });
+    }
+
+    const sql = 'INSERT INTO Tags (TagName, TagImage) VALUES (?, ?)';
+    const params = [TagName, TagImage];
+
+    db.run(sql, params, function (err) {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+
+        // After inserting the new tag, regenerate the JSON file
+        generateTagJson(() => {
+            res.json({
+                message: 'Tag added successfully',
+                data: { id: this.lastID, TagName, TagImage }
+            });
+        });
+    });
+});
+
+// Function to write tags to JSON file
+app.get('/generate-tag-json', (req, res) => {
+    const sql = 'SELECT TagID, TagName, TagImage FROM Tags ORDER BY TagName';
+
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+
+        const dirPath = path.join(__dirname, 'data', 'jsonfiles'); // Path to the directory
+        const filePath = path.join(dirPath, 'tags.json'); // Path to the JSON file
+
+        // Ensure the directory exists, if not, create it
+        if (!fs.existsSync(dirPath)) {
+            fs.mkdirSync(dirPath, { recursive: true }); // Create directory recursively if it doesn't exist
+        }
+
+        fs.writeFile(filePath, JSON.stringify(rows, null, 2), (err) => {
+            if (err) throw err;
+            console.log('Tags data written to JSON file.');
+            res.send('Tags JSON generated');
+        });
+    });
+});
+
+// Route to get a tag by ID
+app.get('/api/tags/:id', (req, res) => {
+    const { id } = req.params; // Extract the ID from the request parameters
+    const sql = 'SELECT TagID, TagName, TagImage FROM Tags WHERE TagID = ?';
+
+    db.get(sql, [id], (err, row) => {
+        if (err) {
+            console.error('Error:', err.message);
+            return res.status(500).json({ error: 'Error retrieving the tag' });
+        }
+
+        if (!row) {
+            return res.status(404).json({ error: 'Tag not found' });
+        }
+
+        res.json(row); // Send the tag details as JSON
+    });
+});
+
+// PATCH endpoint to update an existing tag
+app.patch('/api/tags/:id', upload.single('TagImage'), (req, res) => {
+    const { TagName } = req.body;
+    const TagImage = req.file ? req.file.filename : null;
+    const { id } = req.params;
+
+    if (!TagName) {
+        return res.status(400).json({ error: "TagName is required" });
+    }
+
+    // Prepare SQL query with conditional update for the image
+    let sql = 'UPDATE Tags SET TagName = ?';
+    const params = [TagName];
+
+    if (TagImage) {
+        sql += ', TagImage = ?';
+        params.push(TagImage);
+    }
+
+    sql += ' WHERE TagID = ?'; // Ensure you're using TagID to update the correct record
+    params.push(id);
+
+    db.run(sql, params, function (err) {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+
+        // After updating the tag, regenerate the JSON file
+        generateTagJson(() => {
+            res.json({
+                message: 'Tag updated successfully',
+                data: { id, TagName, TagImage }
+            });
+        });
+    });
+});
+
+// Route for deleting a tag
+app.delete('/api/tags/:id', (req, res) => {
+    const { id } = req.params;
+
+    // Proceed directly with the deletion of the tag
+    const deleteSql = 'DELETE FROM Tags WHERE TagID = ?';
+
+    db.run(deleteSql, [id], function (err) {
+        if (err) {
+            return res.status(500).json({ error: 'Error deleting tag' });
+        }
+
+        if (this.changes === 0) {
+            return res.status(404).json({ error: 'Tag not found' });
+        }
+
+        // After deletion, regenerate the JSON file
+        generateTagJson(() => {
+            res.json({ message: 'Tag deleted successfully' });
+        });
+    });
+});
+
+function generateTagJson(callback) {
+    const sql = 'SELECT TagID, TagName, TagImage FROM Tags ORDER BY TagName';
+
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            console.error('Error generating tag JSON:', err.message);
+            return callback(err);
+        }
+
+        const dirPath = path.join(__dirname, 'data', 'jsonfiles');
+        const filePath = path.join(dirPath, 'tags.json');
+
+        // Ensure the directory exists
+        if (!fs.existsSync(dirPath)) {
+            fs.mkdirSync(dirPath, { recursive: true });
+        }
+
+        fs.writeFile(filePath, JSON.stringify(rows, null, 2), (err) => {
+            if (err) {
+                console.error('Error writing JSON file:', err.message);
+                return callback(err);
+            }
+            console.log('Tags data written to JSON file.');
+            callback();
+        });
+    });
+}
+
 // Start the server
 const PORT = 3000;
 app.listen(PORT, () => {
