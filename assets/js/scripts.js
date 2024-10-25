@@ -62,7 +62,7 @@ window.onload = function () {
             openTab(e, tab.dataset.tab);
         });
     });
-
+/*
     // Fetch and display categories
     fetch('/api/categories')
         .then(response => response.json())
@@ -98,6 +98,43 @@ window.onload = function () {
             }
         })
         .catch(error => console.error('Error fetching tags:', error));
+*/
+    // Fetch and display categories from the JSON file
+    fetch('/data/jsonfiles/categories.json')  // Path to the static JSON file
+        .then(response => response.json())
+        .then(categories => {
+            const categoryList = document.getElementById('category-list');
+            if (categoryList) {
+                categories.forEach(category => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = `/category/${category.CategoryID}`; // Link to category page
+                    link.textContent = category.CategoryName;
+                    listItem.appendChild(link);
+                    categoryList.appendChild(listItem);
+                });
+            }
+        })
+        .catch(error => console.error('Error fetching categories:', error));
+
+    // Fetch and display tags from the JSON file
+    fetch('/data/jsonfiles/tags.json')  // Path to the static JSON file
+        .then(response => response.json())
+        .then(tags => {
+            const tagList = document.getElementById('tag-list');
+            if (tagList) {
+                tags.forEach(tag => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = `/tag/${tag.TagID}`; // Link to tag page
+                    link.textContent = tag.TagName;
+                    listItem.appendChild(link);
+                    tagList.appendChild(listItem);
+                });
+            }
+        })
+        .catch(error => console.error('Error fetching tags:', error));
+
 
     // Button event listener for generating the Category JSON
     const generateButton = document.getElementById('generate-json-button');
