@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-
 function openTab(event, tabName) {
     // Hide all tab content
     const tabContents = document.getElementsByClassName("tab-content");
@@ -49,7 +48,7 @@ window.onload = function () {
     function openTab(evt, tabName) {
         const tabContents = document.querySelectorAll('.tab-content');
         tabContents.forEach(content => content.classList.remove('active'));
-        document.getElementById(tabName).classList.add('active');
+        //document.getElementById(tabName).classList.add('active');
 
         const tabLinks = document.querySelectorAll('.tab-link');
         tabLinks.forEach(link => link.classList.remove('active'));
@@ -63,6 +62,42 @@ window.onload = function () {
             openTab(e, tab.dataset.tab);
         });
     });
+
+    // Fetch and display categories
+    fetch('/api/categories')
+        .then(response => response.json())
+        .then(categories => {
+            const categoryList = document.getElementById('category-list');
+            if (categoryList) {
+                categories.forEach(category => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = `/category/${category.CategoryID}`; // Link to category page
+                    link.textContent = category.CategoryName;
+                    listItem.appendChild(link);
+                    categoryList.appendChild(listItem);
+                });
+            }
+        })
+        .catch(error => console.error('Error fetching categories:', error));
+
+    // Fetch and display tags
+    fetch('/api/tags')
+        .then(response => response.json())
+        .then(tags => {
+            const tagList = document.getElementById('tag-list');
+            if (tagList) {
+                tags.forEach(tag => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = `/tag/${tag.TagID}`; // Link to tag page
+                    link.textContent = tag.TagName;
+                    listItem.appendChild(link);
+                    tagList.appendChild(listItem);
+                });
+            }
+        })
+        .catch(error => console.error('Error fetching tags:', error));
 
     // Button event listener for generating the Category JSON
     const generateButton = document.getElementById('generate-json-button');
@@ -81,23 +116,22 @@ window.onload = function () {
         });
     }
 
-// Button event listener for generating the Tag JSON
-const generateTagButton = document.getElementById('generate-tag-json-button');
-if (generateTagButton) {
-    generateTagButton.addEventListener('click', function () {
-        fetch('/generate-tag-json')
-            .then(response => response.text())
-            .then(data => {
-                alert('Tags JSON file generated successfully.');
-                console.log(data); // Logs server response
-            })
-            .catch(error => {
-                console.error('Error generating JSON:', error);
-                alert('Failed to generate JSON.');
-            });
-    });
-}
+    // Button event listener for generating the Tag JSON
+    const generateTagButton = document.getElementById('generate-tag-json-button');
+    if (generateTagButton) {
+        generateTagButton.addEventListener('click', function () {
+            fetch('/generate-tag-json')
+                .then(response => response.text())
+                .then(data => {
+                    alert('Tags JSON file generated successfully.');
+                    console.log(data); // Logs server response
+                })
+                .catch(error => {
+                    console.error('Error generating JSON:', error);
+                    alert('Failed to generate JSON.');
+                });
+        });
+    }
 };
-
 
 console.log("Website is loaded!");

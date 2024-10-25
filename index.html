@@ -59,13 +59,13 @@
         </section>
 
         <section id="categories" class="tab-content">
-            <h2>Table of Contents</h2>
-            <p>Here you can add the categories for your recipes.</p>
+            <h2 class="title">Table of Contents</h2>
+            <ul id="category-list" class="centered-links"></ul>
         </section>
 
         <section id="tags" class="tab-content">
-            <h2>Table of Contents</h2>
-            <p>Here you can add the tags for your recipes.</p>
+            <h2 class="title">Table of Contents</h2>
+            <ul id="tag-list" class="centered-links"></ul>
         </section>
 
         <section id="manage" class="tab-content">
@@ -78,9 +78,11 @@
         </section>
         <!-- Admin Section (Initially hidden) -->
         <section id="admin" class="tab-content">
-            <h2>Admin Tools</h2>
-            <button id="generate-json-button" class="right-aligned">Generate Categories JSON</button>
-			<button id="generate-tag-json-button" class="right-aligned">Generate Tags JSON</button>
+            <h2 class="title">Admin Tools</h2>
+            <div class="admin-buttons">
+                <button id="generate-json-button" class="styled-button">Generate Categories JSON</button>
+                <button id="generate-tag-json-button" class="styled-button">Generate Tags JSON</button>
+            </div>
         </section>
     </main>
 
